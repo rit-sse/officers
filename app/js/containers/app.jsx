@@ -53,6 +53,7 @@ class OfficersApp extends React.Component {
             </ul>
           </div>
         </div>
+        {this.props.children}
       </div>
 
     );
