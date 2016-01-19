@@ -38,3 +38,15 @@
 .unstyled-li {
   list-style-type: none;
 }
+
+.media-body {
+  vertical-align: middle;
+}
+
+.extra-padding {
+  padding-bottom: 10px;
+}
+
+.width-50 {
+  width: 80%;
+}

@@ -11,7 +11,7 @@ export const EDIT_OFFICER_FAILURE = 'EDIT_OFFICER_FAILURE';
 
 function getOfficersSuccess(officers) {
   return {
-    type: GET_OFFICERS_SUCCESSS,
+    type: GET_OFFICERS_SUCCESS,
     officers,
   };
 }
