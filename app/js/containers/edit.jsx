@@ -33,7 +33,14 @@ class Edit extends React.Component {
   render() {
     return (
       <div className='container'>
-        <h2 className='text-center'>Editing Officers</h2>
+        <div className='row'>
+          <div className='col-xs-8 col-xs-offset-2'>
+            <h2 className='text-center'>Editing Officers</h2>
+          </div>
+          <div className='col-xs-2'>
+            <button className='btn btn-link add-button'><i className='fa fa-2x fa-pencil-square-o' /></button>
+          </div>
+        </div>
         <OfficerTable
           officers={this.props.officers}
         />
