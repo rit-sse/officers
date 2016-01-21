@@ -29,7 +29,7 @@ class Home extends React.Component {
         <h3>Primary Officers</h3>
         <div className='container width-50'>
           <div className='row'>
-            {this.props.officers.map(officer => {
+            {this.props.officers.list.map(officer => {
               if (officer.primaryOfficer) {
                 return <Officer officer={officer} />;
               }
@@ -39,7 +39,7 @@ class Home extends React.Component {
         <h3>Committee Heads</h3>
         <div className='container width-50'>
           <div className='row'>
-            {this.props.officers.map(officer => {
+            {this.props.officers.list.map(officer => {
               if (!officer.primaryOfficer) {
                 return <Officer officer={officer} />;
               }
