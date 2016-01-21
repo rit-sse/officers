@@ -60,7 +60,9 @@ class OfficersApp extends React.Component {
         <div id='header' className='page-header'>
           <div className='flex'>
             <h1 className='text-left'>
-              Officers
+              <Link className='no-decoration' to='/officers'>
+                Officers
+              </Link>
               <small> John Renner's Leadership Team&trade;</small>
             </h1>
             <ul className='list-inline bottom-align hidden-xs'>

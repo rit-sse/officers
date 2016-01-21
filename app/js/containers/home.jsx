@@ -31,7 +31,7 @@ class Home extends React.Component {
           <div className='row'>
             {this.props.officers.list.map(officer => {
               if (officer.primaryOfficer) {
-                return <Officer officer={officer} />;
+                return <Officer key={officer.email} officer={officer} />;
               }
             })}
           </div>
@@ -41,7 +41,7 @@ class Home extends React.Component {
           <div className='row'>
             {this.props.officers.list.map(officer => {
               if (!officer.primaryOfficer) {
-                return <Officer officer={officer} />;
+                return <Officer key={officer.email} officer={officer} />;
               }
             })}
           </div>
