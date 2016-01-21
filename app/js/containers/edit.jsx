@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getOfficers } from '../actions/officers';
 import Pagination from '../components/pagination';
+import OfficerTable from '../components/officer-table';
 
 function mapStateToProps(state) {
   return {
@@ -32,12 +33,17 @@ class Edit extends React.Component {
   render() {
     return (
       <div className='container'>
-        <h2>Editing Officers</h2>
-        <Pagination
-          total={this.props.officers.total}
-          perPage={this.props.officers.perPage}
-          currentPage={this.props.location.query.page}
+        <h2 className='text-center'>Editing Officers</h2>
+        <OfficerTable
+          officers={this.props.officers}
         />
+        <div className='text-center'>
+          <Pagination
+            total={this.props.officers.total}
+            perPage={this.props.officers.perPage}
+            currentPage={this.props.location.query.page}
+          />
+        </div>
       </div>
     );
   }
