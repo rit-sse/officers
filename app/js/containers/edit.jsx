@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { getOfficers } from '../actions/officers';
+import Pagination from '../components/pagination';
 
 function mapStateToProps(state) {
   return {
@@ -16,10 +17,27 @@ class Edit extends React.Component {
     super();
   }
 
+  componentDidMount() {
+    const { query } = this.props.location;
+    this.props.dispatch(getOfficers(query.page || 1));
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (this.props.location.query.page !== newProps.location.query.page) {
+      const { query } = newProps.location;
+      this.props.dispatch(getOfficers(query.page || 1));
+    }
+  }
+
   render() {
     return (
       <div className='container'>
-        <h1>Edit</h1>
+        <h2>Editing Officers</h2>
+        <Pagination
+          total={this.props.officers.total}
+          perPage={this.props.officers.perPage}
+          currentPage={this.props.location.query.page}
+        />
       </div>
     );
   }
