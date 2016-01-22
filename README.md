@@ -1,4 +1,6 @@
 # officers
+[![Circle CI](https://circleci.com/gh/rit-sse/officers.svg?style=svg)](https://circleci.com/gh/rit-sse/officers)
+
 Manage those officers.
 
 ## Development
