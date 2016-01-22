@@ -15,8 +15,10 @@ export default function officers(state = { list: [], total: 0, perPage: 15 }, ac
       perPage: action.perPage,
     });
   case ADD_OFFICER_SUCCESS:
+    const list = state.list.slice();
+    list.push(action.officer);
     return Object.assign({}, state, {
-      list: state.list.slice().push(action.officer),
+      list,
       total: state.total + 1,
       perPage: action.perPage,
     });

@@ -2,25 +2,34 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { getOfficers } from '../actions/officers';
+import { getOfficers, addOfficer } from '../actions/officers';
+import { getCommittees } from '../actions/committees';
 import Pagination from '../components/pagination';
 import OfficerTable from '../components/officer-table';
+import FormModal from '../components/form-modal';
 
 function mapStateToProps(state) {
   return {
     officers: state.officers,
+    committees: state.committees,
   };
 }
-
 
 class Edit extends React.Component {
   constructor() {
     super();
+
+    this.state = { showAdd: false };
+
+    this.showAdd = this.showAdd.bind(this);
+    this.hideAdd = this.hideAdd.bind(this);
+    this.addOfficer = this.addOfficer.bind(this);
   }
 
   componentDidMount() {
     const { query } = this.props.location;
     this.props.dispatch(getOfficers(query.page || 1));
+    this.props.dispatch(getCommittees());
   }
 
   componentWillReceiveProps(newProps) {
@@ -28,6 +37,18 @@ class Edit extends React.Component {
       const { query } = newProps.location;
       this.props.dispatch(getOfficers(query.page || 1));
     }
+  }
+
+  showAdd() {
+    this.setState({ showAdd: true });
+  }
+
+  hideAdd() {
+    this.setState({ showAdd: false });
+  }
+
+  addOfficer(officer) {
+    this.props.dispatch(addOfficer(officer));
   }
 
   render() {
@@ -38,7 +59,9 @@ class Edit extends React.Component {
             <h2 className='text-center'>Editing Officers</h2>
           </div>
           <div className='col-xs-2'>
-            <button className='btn btn-link add-button'><i className='fa fa-2x fa-pencil-square-o' /></button>
+            <button className='btn btn-link add-button' onClick={this.showAdd}>
+              <i className='fa fa-2x fa-pencil-square-o' />
+            </button>
           </div>
         </div>
         <OfficerTable
@@ -51,6 +74,14 @@ class Edit extends React.Component {
             currentPage={this.props.location.query.page}
           />
         </div>
+        <FormModal
+          title='Add'
+          show={this.state.showAdd}
+          close={this.hideAdd}
+          submit={this.addOfficer}
+          committees={this.props.committees}
+          officer={{ user: {}, committee: {} }}
+        />
       </div>
     );
   }

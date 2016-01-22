@@ -9,7 +9,11 @@ export default {
   },
 
   source: {
-    css: './app/css/**.css',
+    css: [
+      './app/css/**.css',
+      './node_modules/react-select/dist/react-select.min.css',
+      './node_modules/react-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css',
+    ],
     jsMain: './app/js/app.jsx',
     scripts: './app/js/**/*.@(js|jsx)',
     html: './app/index.html',
