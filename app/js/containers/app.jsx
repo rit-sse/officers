@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import LogIn from '../components/log-in';
 
 function mapStateToProps(state) {
@@ -15,6 +16,7 @@ class OfficersApp extends React.Component {
     super();
 
     this.renderLogIn = this.renderLogIn.bind(this);
+    this.renderEditLink = this.renderEditLink.bind(this);
   }
 
   renderLogIn() {
@@ -39,16 +41,32 @@ class OfficersApp extends React.Component {
     );
   }
 
+  renderEditLink() {
+    if (this.props.auth.signedIn) {
+      return (
+        <li>
+          <Link to='/officers/edit'>
+            <button className='btn btn-link'>Edit Officers</button>
+          </Link>
+        </li>
+      );
+    }
+    return <li><span/></li>;
+  }
+
   render() {
     return (
       <div className='container'>
         <div id='header' className='page-header'>
           <div className='flex'>
             <h1 className='text-left'>
-              Officers
+              <Link className='no-decoration' to='/officers'>
+                Officers
+              </Link>
               <small> John Renner's Leadership Team&trade;</small>
             </h1>
             <ul className='list-inline bottom-align hidden-xs'>
+              {this.renderEditLink()}
               {this.renderLogIn()}
             </ul>
           </div>

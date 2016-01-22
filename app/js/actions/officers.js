@@ -9,10 +9,19 @@ export const ADD_OFFICER_FAILURE = 'ADD_OFFICER_FAILURE';
 export const EDIT_OFFICER_SUCCESS = 'EDIT_OFFICER_SUCCESS';
 export const EDIT_OFFICER_FAILURE = 'EDIT_OFFICER_FAILURE';
 
-function getOfficersSuccess(officers) {
+function getActiveOfficersSuccess(officers) {
   return {
     type: GET_OFFICERS_SUCCESS,
     officers,
+  };
+}
+
+function getOfficersSuccess(officers) {
+  return {
+    type: GET_OFFICERS_SUCCESS,
+    officers: officers.data,
+    total: officers.total,
+    perPage: officers.perPage,
   };
 }
 
@@ -55,7 +64,7 @@ function editOfficerFailure(error) {
 export function getActiveOfficers(active) {
   return dispatch => {
     return api.Officers.all({ active }, true)
-      .then(body => dispatch(getOfficersSuccess(body)))
+      .then(body => dispatch(getActiveOfficersSuccess(body)))
       .catch(error => dispatch(getOfficersFailure(error)));
   };
 }
