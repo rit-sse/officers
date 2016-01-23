@@ -58,7 +58,7 @@ class Edit extends React.Component {
   }
 
   addOfficer(officer) {
-    this.props.dispatch(addOfficer(officer));
+    return this.props.dispatch(addOfficer(officer));
   }
 
   render() {

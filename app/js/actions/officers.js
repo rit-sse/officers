@@ -81,7 +81,10 @@ export function addOfficer(officer) {
   return dispatch => {
     return api.Officers.create(officer)
       .then(o => dispatch(addOfficerSuccess(o)))
-      .catch(error => dispatch(addOfficerFailure(error)));
+      .catch(error => {
+        dispatch(addOfficerFailure(error));
+        return Promise.reject();
+      });
   };
 }
 
