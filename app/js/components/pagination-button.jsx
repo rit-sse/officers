@@ -11,7 +11,7 @@ export default class PaginationButton extends React.Component {
 
   render() {
     return (
-      <Link to={{ pathname: '/officers/edit', page: this.props.eventKey }}>
+      <Link to={{ pathname: '/officers/edit', query: { page: this.props.eventKey } }}>
         {this.props.children}
       </Link>
     );

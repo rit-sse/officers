@@ -18,7 +18,7 @@ export default class PaginationClass extends React.Component {
         ellipsis
         items={Math.ceil(this.props.total/this.props.perPage)}
         maxButtons={5}
-        activePage={parseInt(this.props.currentPage, 10)}
+        activePage={parseInt(this.props.currentPage, 10) || 1}
         buttonComponentClass={PaginationButton} />
     );
   }
