@@ -22,10 +22,11 @@ export default class OfficerTable extends React.Component {
             <th>Last Name</th>
             <th>Start Date</th>
             <th>End Date</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          {this.props.officers.list.map( officer => {
+          {this.props.officers.list.map( (officer, i) => {
             return (
               <tr key={officer.id}>
                 <td>{officer.title}</td>
@@ -37,6 +38,11 @@ export default class OfficerTable extends React.Component {
                 <td>{officer.user.lastName}</td>
                 <td>{moment(officer.startDate).format('MM/DD/YYYY')}</td>
                 <td>{officer.endDate ? moment(officer.endDate).format('MM/DD/YYYY') : ''}</td>
+                <td className='text-center'>
+                  <a onClick={() => this.props.showEdit(officer, i)}>
+                    <i className='fa fa-pencil' />
+                  </a>
+                </td>
               </tr>
             );
           })}

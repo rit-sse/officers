@@ -19,10 +19,12 @@ class Edit extends React.Component {
   constructor() {
     super();
 
-    this.state = { showAdd: false };
+    this.state = { officer: { user: {}, committee: {} }, showEdit: false, showAdd: false };
 
     this.showAdd = this.showAdd.bind(this);
     this.hideAdd = this.hideAdd.bind(this);
+    this.showEdit = this.showEdit.bind(this);
+    this.hideEdit = this.hideEdit.bind(this);
     this.addOfficer = this.addOfficer.bind(this);
   }
 
@@ -47,6 +49,14 @@ class Edit extends React.Component {
     this.setState({ showAdd: false });
   }
 
+  showEdit(officer) {
+    this.setState({ officer, showEdit: true });
+  }
+
+  hideEdit() {
+    this.setState({ officer: { user: {}, committee: {} }, showEdit: false });
+  }
+
   addOfficer(officer) {
     this.props.dispatch(addOfficer(officer));
   }
@@ -66,6 +76,7 @@ class Edit extends React.Component {
         </div>
         <OfficerTable
           officers={this.props.officers}
+          showEdit={this.showEdit}
         />
         <div className='text-center'>
           <Pagination
@@ -81,6 +92,14 @@ class Edit extends React.Component {
           submit={this.addOfficer}
           committees={this.props.committees}
           officer={{ user: {}, committee: {} }}
+        />
+        <FormModal
+          title='Edit'
+          show={this.state.showEdit}
+          close={this.hideEdit}
+          submit={this.editOfficer}
+          committees={this.props.committees}
+          officer={this.state.officer}
         />
       </div>
     );
