@@ -9,15 +9,16 @@ import { reduxForm } from 'redux-form';
 import { load } from '../actions/form';
 
 const fields = [
+  'id',
   'title',
   'email',
   'primaryOfficer',
   'startDate',
   'endDate',
+  'committeeName',
   'user.firstName',
   'user.lastName',
   'user.dce',
-  'committee.name',
 ];
 
 class FormModal extends React.Component {
@@ -29,12 +30,12 @@ class FormModal extends React.Component {
   }
 
   componentDidMount() {
-    this.props.load(this.props.officer);
+    this.props.dispatch(load(this.props.officer));
   }
 
   componentWillReceiveProps(newProps) {
     if (!this.props.show && newProps.show) {
-      this.props.load(this.props.officer);
+      this.props.dispatch(load(newProps.officer));
     }
   }
 
@@ -59,7 +60,7 @@ class FormModal extends React.Component {
       startDate,
       endDate,
       user: { firstName, lastName, dce },
-      committee: { name },
+      committeeName,
     } } = this.props;
     return (
       <Modal
@@ -91,12 +92,12 @@ class FormModal extends React.Component {
                 options={this.props.committees.map(committee => {
                   return { value: committee.name, label: committee.name };
                 })}
-                allowCreate
+                allowCreate={this.props.title === 'Add'}
                 newOptionCreator={value => {
                   return { label: value, value };
                 }}
-                value={name.value}
-                onChange={name.onChange}
+                value={committeeName.value}
+                onChange={committeeName.onChange}
               />
             </div>
           </div>
@@ -113,19 +114,19 @@ class FormModal extends React.Component {
           <div className='form-group'>
             <label className='control-label col-sm-2' htmlFor='dce'>DCE</label>
             <div className='col-sm-10'>
-              <input className='form-control' type='text' id='dce' placeholder='DCE' {...dce} />
+              <input disabled={this.props.title === 'Edit'} className='form-control' type='text' id='dce' placeholder='DCE' {...dce} />
             </div>
           </div>
           <div className='form-group'>
             <label className='control-label col-sm-2' htmlFor='firstName'>First Name</label>
             <div className='col-sm-10'>
-              <input className='form-control' type='text' id='firstName' placeholder='First Name' {...firstName} />
+              <input disabled={this.props.title === 'Edit'} className='form-control' type='text' id='firstName' placeholder='First Name' {...firstName} />
             </div>
           </div>
           <div className='form-group'>
             <label className='control-label col-sm-2' htmlFor='lastName'>Last Name</label>
             <div className='col-sm-10'>
-              <input className='form-control' type='text' id='lastName' placeholder='Last Name' {...lastName} />
+              <input disabled={this.props.title === 'Edit'} className='form-control' type='text' id='lastName' placeholder='Last Name' {...lastName} />
             </div>
           </div>
           <div className='form-group'>
@@ -144,7 +145,7 @@ class FormModal extends React.Component {
             <label className='control-label col-sm-2' htmlFor='endDate'>End Date</label>
             <div className='col-sm-10'>
               <DateTimeField
-                dateTime={endDate.value || null}
+                dateTime={endDate.value || new Date()}
                 onChange={endDate.onChange}
                 format=''
                 ref='endDate'
@@ -164,6 +165,4 @@ export default reduxForm({
 },
 state => ({
   initialValues: state.initialFormState.data,
-}),
-{ load }
-)(FormModal);
+}))(FormModal);

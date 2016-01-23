@@ -90,8 +90,11 @@ export function addOfficer(officer) {
 
 export function editOfficer(officer, index) {
   return dispatch => {
-    return api.Officer.update(officer.id, officer)
+    return api.Officers.update(officer.id, officer)
       .then(o => dispatch(editOfficerSuccess(o, index)))
-      .catch(error => dispatch(editOfficerFailure(error)));
+      .catch(error => {
+        dispatch(editOfficerFailure(error));
+        return Promise.reject();
+      });
   };
 }

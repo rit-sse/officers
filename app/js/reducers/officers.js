@@ -23,8 +23,10 @@ export default function officers(state = { list: [], total: 0, perPage: 15 }, ac
       perPage: action.perPage,
     });
   case EDIT_OFFICER_SUCCESS:
+    const editList = state.list.slice();
+    editList.splice(action.index, 1, action.officer);
     return Object.assign({}, state, {
-      list: state.list.slice().splice(action.index, 1, action.officer),
+      list: editList,
       total: state.total,
       perPage: action.perPage,
     });

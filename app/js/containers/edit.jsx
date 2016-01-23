@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { getOfficers, addOfficer } from '../actions/officers';
+import { getOfficers, addOfficer, editOfficer } from '../actions/officers';
 import { getCommittees } from '../actions/committees';
 import Pagination from '../components/pagination';
 import OfficerTable from '../components/officer-table';
@@ -19,13 +19,30 @@ class Edit extends React.Component {
   constructor() {
     super();
 
-    this.state = { officer: { user: {}, committee: {} }, showEdit: false, showAdd: false };
+    this.state = {
+      defaultOfficer: {
+        title: '',
+        email: '',
+        primaryOfficer: false,
+        endDate: '',
+        startDate: new Date(),
+        user: {
+          firstName: '',
+          lastName: '',
+          dce: '',
+        },
+      },
+      showEdit: false,
+      showAdd: false,
+    };
+    this.state.officer = this.state.defaultOfficer;
 
     this.showAdd = this.showAdd.bind(this);
     this.hideAdd = this.hideAdd.bind(this);
     this.showEdit = this.showEdit.bind(this);
     this.hideEdit = this.hideEdit.bind(this);
     this.addOfficer = this.addOfficer.bind(this);
+    this.editOfficer = this.editOfficer.bind(this);
   }
 
   componentDidMount() {
@@ -46,7 +63,7 @@ class Edit extends React.Component {
   }
 
   hideAdd() {
-    this.setState({ showAdd: false });
+    this.setState({ officer: this.state.defaultOfficer, showAdd: false });
   }
 
   showEdit(officer, index) {
@@ -54,11 +71,15 @@ class Edit extends React.Component {
   }
 
   hideEdit() {
-    this.setState({ officer: { user: {}, committee: {} }, showEdit: false });
+    this.setState({ officer: this.state.defaultOfficer, showEdit: false });
   }
 
   addOfficer(officer) {
     return this.props.dispatch(addOfficer(officer));
+  }
+
+  editOfficer(officer) {
+    return this.props.dispatch(editOfficer(officer, this.state.index));
   }
 
   render() {
@@ -91,7 +112,7 @@ class Edit extends React.Component {
           close={this.hideAdd}
           submit={this.addOfficer}
           committees={this.props.committees}
-          officer={{ startDate: new Date() }}
+          officer={this.state.officer}
         />
         <FormModal
           title='Edit'
