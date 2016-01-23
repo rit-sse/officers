@@ -49,8 +49,8 @@ class Edit extends React.Component {
     this.setState({ showAdd: false });
   }
 
-  showEdit(officer) {
-    this.setState({ officer, showEdit: true });
+  showEdit(officer, index) {
+    this.setState({ officer, index, showEdit: true });
   }
 
   hideEdit() {
@@ -91,7 +91,7 @@ class Edit extends React.Component {
           close={this.hideAdd}
           submit={this.addOfficer}
           committees={this.props.committees}
-          officer={{ user: {}, committee: {} }}
+          officer={{ startDate: new Date() }}
         />
         <FormModal
           title='Edit'
