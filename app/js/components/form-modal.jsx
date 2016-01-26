@@ -50,7 +50,7 @@ class FormModal extends React.Component {
     } else {
       officer.endDate = null;
     }
-    
+
     this.props.submit(officer)
       .then(() => this.props.close());
   }
