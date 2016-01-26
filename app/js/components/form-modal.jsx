@@ -47,7 +47,10 @@ class FormModal extends React.Component {
 
     if (officer.endDate && !isNaN(officer.endDate.valueOf())) {
       officer.endDate = moment.tz(endDate, 'America/New_York').utc().toDate();
+    } else {
+      officer.endDate = null;
     }
+    
     this.props.submit(officer)
       .then(() => this.props.close());
   }
