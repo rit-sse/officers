@@ -1,12 +1,11 @@
 'use strict';
 
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
 
-const createStoreWithMiddleware = compose(
-  applyMiddleware(thunk),
-  window.devToolsExtension ? window.devToolsExtension() : f => f
+const createStoreWithMiddleware = applyMiddleware(
+  thunk
 )(createStore);
 
 export default createStoreWithMiddleware(reducer);
