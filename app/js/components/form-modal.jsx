@@ -95,7 +95,7 @@ class FormModal extends React.Component {
                 options={this.props.committees.map(committee => {
                   return { value: committee.name, label: committee.name };
                 })}
-                allowCreate={this.props.title === 'Add'}
+                allowCreate
                 newOptionCreator={value => {
                   return { label: value, value };
                 }}
@@ -117,7 +117,7 @@ class FormModal extends React.Component {
           <div className='form-group'>
             <label className='control-label col-sm-2' htmlFor='dce'>DCE</label>
             <div className='col-sm-10'>
-              <input disabled={this.props.title === 'Edit'} className='form-control' type='text' id='dce' placeholder='DCE' {...dce} />
+              <input className='form-control' type='text' id='dce' placeholder='DCE' {...dce} />
             </div>
           </div>
           <div className='form-group'>
