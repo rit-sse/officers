@@ -40,13 +40,13 @@ class FormModal extends React.Component {
   }
 
   submit(values) {
+    console.log('Values', values);
     const officer = Object.assign({}, values);
     officer.primaryOfficer = Boolean(officer.primaryOfficer);
 
     officer.startDate = moment.tz(officer.startDate, 'America/New_York').utc().toDate();
-
-    if (officer.endDate && !isNaN(officer.endDate.valueOf())) {
-      officer.endDate = moment.tz(endDate, 'America/New_York').utc().toDate();
+    if (officer.endDate && officer.endDate.valueOf() !== '') {
+      officer.endDate = moment.tz(officer.endDate.valueOf(), 'America/New_York').utc().toDate();
     } else {
       officer.endDate = null;
     }
