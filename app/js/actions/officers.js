@@ -1,5 +1,3 @@
-'use strict';
-
 import api from '../api';
 
 export const GET_OFFICERS_SUCCESS = 'GET_OFFICERS_SUCCESS';

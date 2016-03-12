@@ -1,5 +1,3 @@
-'use strict';
-
 import {
   GET_OFFICERS_SUCCESS,
   ADD_OFFICER_SUCCESS,

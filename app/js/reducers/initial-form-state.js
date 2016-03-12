@@ -1,5 +1,3 @@
-'use strict';
-
 import { LOAD } from '../actions/form';
 
 export default function load(state= {}, action) {

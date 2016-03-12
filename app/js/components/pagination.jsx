@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import Pagination from 'react-bootstrap/lib/Pagination';
 import PaginationButton from './pagination-button';
