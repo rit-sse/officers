@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import Modal from './modal';
 import DateTimeField from 'react-bootstrap-datetimepicker';
