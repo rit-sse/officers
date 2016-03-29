@@ -14,13 +14,13 @@ export default class LogIn extends React.Component {
       .Auth
       .clientId()
       .then( ({ token }) => {
-         const auth2 = gapi.auth2.init({
-           client_id: process.env.GOOGLE_CLIENT_ID, // eslint-disable-line camelcase
-           cookie_policy: 'single_host_origin', // eslint-disable-line camelcase
-         });
-         auth2.attachClickHandler(this.refs.button, { prompt: 'select_account' }, googleUser => {
-           this.props.dispatch(signIn(googleUser));
-         });
+          const auth2 = gapi.auth2.init({
+            client_id: token, // eslint-disable-line camelcase
+            cookie_policy: 'single_host_origin', // eslint-disable-line camelcase
+          });
+          auth2.attachClickHandler(this.refs.button, { prompt: 'select_account' }, googleUser => {
+            this.props.dispatch(signIn(googleUser));
+          });
       }) 
       .catch( err => console.log(err) );
   }
