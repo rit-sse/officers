@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import LogIn from '../components/log-in';
+import { checkLogin, signOut } from '../actions/auth';
 
 function mapStateToProps(state) {
   return {
@@ -15,6 +16,10 @@ class OfficersApp extends React.Component {
 
     this.renderLogIn = this.renderLogIn.bind(this);
     this.renderEditLink = this.renderEditLink.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.dispatch(checkLogin());
   }
 
   renderLogIn() {
