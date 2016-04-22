@@ -21,6 +21,7 @@ export default class LogIn extends React.Component {
         auth2.attachClickHandler(this.refs.button, { prompt: 'select_account' }, googleUser => {
           this.props.dispatch(signIn(googleUser));
         });
+        this.setState({ disableLogin: false });
       })
       .catch( err => console.log(err) );
   }
