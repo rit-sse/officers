@@ -5,12 +5,9 @@ machine:
 test:
   pre:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS -e tech@sse.rit.edu
-    - docker run --name redis -d redis
     - docker build -t ritsse/officers:$CIRCLE_BRANCH .
- 
   override:
-    - npm run lint
-    - npm run build
+    - docker run -it ritsse/officers:$CIRCLE_BRANCH npm run lint
 
 deployment:
   development:
