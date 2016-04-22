@@ -1,16 +1,25 @@
 machine:
-  node:
-    version: 5.1.0
+  services:
+    - docker
 
 test:
+  pre:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS -e tech@sse.rit.edu
+    - docker run --name redis -d redis
+    - docker build -t ritsse/officers:$CIRCLE_BRANCH .
+ 
   override:
     - npm run lint
     - npm run build
 
 deployment:
+  development:
+    branch: devlop
+    commands:
+      - docker push ritsse/officers:$CIRCLE_BRANCH
   master:
     branch: master
     owner: rit-sse
     commands:
-      - ssh deploy@$SSE_HOST 'cd /docker && docker-compose restart officers nginx'
-
+      - docker tag ritsse/officers:$CIRCLE_BRANCH ritsse/officers
+      - docker push ritsse/officers   
