@@ -66,7 +66,7 @@ class OfficersApp extends React.Component {
               <Link className='no-decoration' to='/officers'>
                 Officers
               </Link>
-              <small> John Renner's Leadership Team&trade;</small>
+              <small> Kayla Davis' Leadership Team&trade;</small>
             </h1>
             <ul className='list-inline bottom-align hidden-xs'>
               {this.renderEditLink()}
